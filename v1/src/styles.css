@@ -1,0 +1,27 @@
+body{
+    width: 100dvw;
+    height: 100dvh;
+    margin: 0;
+}
+
+h1{
+    display: block;
+    margin: 0;
+    text-align: center;
+}
+
+div.cookieContainer{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#cookie{
+    width: 60dvw;
+    height: 60dvh;
+    align-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
