@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- saved from url=(0108)http://localhost:63342/CookieClicker/v1/index.html?_ijt=320qtm78eaiss1eq9ciok3bk76&_ij_reload=RELOAD_ON_SAVE -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Document_files/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./Document_files/css2" rel="stylesheet">
+</head>
+<body>
+    <h1>Welcome to my Cookie Clicker game</h1>
+    <div id="Game">
+        <div id="cookieContainer">
+            <p id="cookieCount">0 cookies</p>
+            <p id="autoclick">x Cookies per second</p>
+            <button id="cookie">
+                <img src="./Document_files/Cookie.jpg" alt="Cookie Image">
+            </button>
+        </div>
+        <div id="investments">
+            <p id="investments_header">Investments:</p>
+            <div class="investment_container" id="investment1">
+                <button class="investment_button" id="investment1_button">
+                    +25% cookies per click!
+                </button>
+                <label for="investment3_button">Buy a Click Boost</label>
+            </div>
+            <div class="investment_container" id="investment2">
+                <button class="investment_button" id="investment2_button">
+                    +0.08 Cookies per second
+                </button>
+                <label for="investment3_button">Buy an Autoclicker?</label>
+            </div>
+            <div class="investment_container" id="investment3">
+                <button class="investment_button" id="investment3_button">
+                    +1 Cookie per second
+                </button>
+                <label for="investment3_button">Buy a Fimble?</label>
+            </div>
+            <div class="investment_container" id="investment4">
+                <button class="investment_button" id="investment4_button"></button>
+                <label for="investment4_button">Invest in Tier 4?</label>
+            </div>
+            <div class="investment_container" id="investment5">
+                <button class="investment_button" id="investment5_button"></button>
+                <label for="investment5_button">Invest in Tier 5?</label>
+            </div>
+            <div class="investment_container" id="investment6">
+                <button class="investment_button" id="investment6_button"></button>
+                <label for="investment6_button">Invest in Tier 6?</label>
+            </div>
+            <div class="investment_container" id="investment7">
+                <button class="investment_button" id="investment7_button"></button>
+                <label for="investment7_button">Invest in Tier 7?</label>
+            </div>
+            <p id="multiplier">1x Multiplier</p>
+        </div>
+    </div>
+    <script src="./Document_files/script.js"></script>
+
+<script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script><div id="forest-ext-shadow-host"><template shadowrootmode="open"><head></head><div id="root"></div></template></div></body></html>

@@ -7,16 +7,74 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="./src/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Welcome to my Cookie Clicker game</h1>
-    <div class="cookieContainer">
-
-        <button id="cookie"></button>
-        <p id="cookieCount">0 cookies</p>
-
-        <button id="invest">invest?</button>
-        <p id="multiplier">multiplier: 1x</p>
+    <div id="Game">
+        <div id="cookieContainer">
+            <p id="cookieCount">x Cookies</p>
+            <p id="autoclick">x Cookies per second</p>
+            <button id="cookie">
+                <img src="./images/Cookie.jpg" alt="Cookie Image">
+            </button>
+        </div>
+        <div id="investments">
+            <p id="investments_header">Investments:</p>
+            <div class="investment_container" id="investment1">
+                <button class="investment_button" id="investment1_button">
+                    +25% cookies per click!
+                </button>
+                <label for="investment3_button">Buy a Click Boost</label>
+                <p class="cost" id="investment1_cost">$20</p>
+            </div>
+            <div class="investment_container" id="investment2">
+                <button class="investment_button" id="investment2_button">
+                    +0.1 Cookies per second
+                </button>
+                <label for="investment3_button">Buy an Autoclicker?</label>
+                <p class="cost" id="investment2_cost">$200</p>
+            </div>
+            <div class="investment_container" id="investment3">
+                <button class="investment_button" id="investment3_button">
+                    +1 Cookie per second
+                </button>
+                <label for="investment3_button">Buy a Helper?</label>
+                <p class="cost" id="investment3_cost">$2,000</p>
+            </div>
+            <div class="investment_container" id="investment4">
+                <button class="investment_button" id="investment4_button">
+                    +10 Cookies per second
+                </button>
+                <label for="investment4_button">Buy a Business man?</label>
+                <p class="cost" id="investment4_cost">$20,000</p>
+            </div>
+            <div class="investment_container" id="investment5">
+                <button class="investment_button" id="investment5_button">
+                    +100 Cookies per second
+                </button>
+                <label for="investment5_button">Buy a Chef?</label>
+                <p class="cost" id="investment5_cost">$200,000</p>
+            </div>
+            <div class="investment_container" id="investment6">
+                <button class="investment_button" id="investment6_button">
+                    +1,000 Cookies per second
+                </button>
+                <label for="investment6_button">Buy a Baker?</label>
+                <p class="cost" id="investment6_cost">$2,000,000</p>
+            </div>
+            <div class="investment_container" id="investment7">
+                <button class="investment_button" id="investment7_button">
+                    +10,000 Cookies per second
+                </button>
+                <label for="investment7_button">Buy God?</label>
+                <p class="cost" id="investment7_cost">$20,000,000</p>
+            </div>
+            <p id="multiplier">xx Multiplier</p>
+            <p id="increase">xx increase</p>
+        </div>
     </div>
     <script src="./src/script.js"></script>
 </body>

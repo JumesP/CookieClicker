@@ -1,27 +1,126 @@
-body{
+* {
+    font-family: "lato",  "Al Bayan", serif;
+}
+
+body, button {
+    background-color: #484848;
+    color: aliceblue;
+}
+
+body {
     width: 100dvw;
     height: 100dvh;
     margin: 0;
 }
 
-h1{
+h1 {
+    background-color: saddlebrown;
     display: block;
-    margin: 0;
+    height: 40px;
+    padding: 10px;
     text-align: center;
+    margin:auto;
 }
 
-div.cookieContainer{
+button, label {
+    cursor: pointer;
+}
+
+p {
+    font-size: 2em;
+    margin: 5px;
+}
+
+div#Game {
+    height: calc(100dvh - 75px);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+div#cookieContainer {
+    width: 50%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-}
-
-#cookie{
-    width: 60dvw;
-    height: 60dvh;
-    align-content: center;
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+/*  Cookie  */
+p#cookieCount {
+    font-size: 2.5em
+}
+
+#autoclick {
+    display: none;
+}
+
+#cookie {
+    background-image: url("../images/Cookie.jpg");
+    /*width: 400px;*/
+    width: 50%;
+    aspect-ratio: 1/1;
+    /*max-width: 100%;*/
+    /*height: 400px;*/
+    padding: 0px;
+    align-content: center;
+}
+
+img {
+    width:100%;
+    aspect-ratio: 1/1;
+}
+
+/*  Investments */
+div#investments {
+    width: 50%;
+}
+
+#investments_header {
+    text-align: center;
+}
+
+div.investment_container {
+    width: 90%;
+    height: 100px;
+    border: black 5px solid;
+    border-radius: 5px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+button.investment_button {
+    height: 100%;
+    width: 33%;
+    background-color: cornflowerblue;
+    border: black 2px solid;
+    font-size: 1em;
+}
+
+.investment_container > label {
+    font-size: 2em;
+    padding-left: 10px
+}
+
+.investment_container > img {
+    width: 100px;
+    aspect-ratio: 1/1;
+}
+
+.cost {
+    padding-right: 10px;
+    width: 175px;
+}
+
+@media screen and (max-width: 1750px) {
+    #Game{
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
 }
