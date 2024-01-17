@@ -1,0 +1,5 @@
+To-do:
+
+- make the game more balanced
+- make the prices of investments increase each time
+- make the benefits of increase per purchase
