@@ -1,25 +1,20 @@
   To-do:
-    - make the game more balanced
 
-    - make the prices of investments increase each time
-    - make the benefits of increase per purchase
-    
-    - add golden cookies
-    - add prestige (with its benefits)
+    Game Functionality
+        - make the game more balanced
 
-    - get a better damn cookie!! DONE
-    - click animation DONE
+        - make the prices of investments increase each time
+        - make the benefits of increase per purchase
+        
+        - add golden cookies
+        - add prestige (with its benefits)
 
-    - switch between investment windows DONE
-    - add 2 other feature pages DONE
-    - one of the feature pages should be statistics DONE
-    
     Statistics:
 
         - make them all work
-            - earnt overall
-            - times clicked
-            - earnt auto
+            - earnt overall DONE
+            - times clicked DONE
+            - earnt auto DONE
             - spent DONE
 
     Store data:
@@ -34,7 +29,11 @@
             - earnt auto
             - spent
 
-  bugs:
-    - fix "Not Enough" multiple click bug
+    Dev Tools:
+        DONE
 
-    - stats at the bottom of the page? supposed to be hidden bug DONE
+    Bugs:
+        - fix "Not Enough" multiple click bug
+        - stats at the bottom of the page? supposed to be hidden bug DONE
+        - increaseCookies for loop not working
+        - initial startup - default values for local storage

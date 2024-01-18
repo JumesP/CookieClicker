@@ -1,25 +1,40 @@
-let cookies = Math.round(parseFloat(localStorage.getItem("cookies") * 10000) / 10000)
-// let cookies = 0
-let multiplier = 1
-let increase = 1.25
-let num = 0
-let currentPageInvest = 0
+if (localStorage.getItem("cookies") === null) {
+	var cookies = 0
+	var multiplier = 1
+	var increase = 1.25
 
-console.log(typeof parseFloat(localStorage.getItem("cookies")))
-console.log(localStorage.getItem("cookies"))
-console.log(cookies)
+	// Statistics
+	var totalEarnt = 0
+	var totalCookieClicks = 0
+	var totalFromAuto = 0
+	var totalSpent = 0
+	var earningAuto = 0
 
-// Statistics
-let totalEarnt = 0
-let totalCookieClicks = 0
-let totalFromAuto = 0
-let totalSpent = 0
+	var currentPageInvest = 0 // current investment page
+	var amount_invested = [0, 0, 0, 0, 0, 0, 0]
+	var investment_values = [0, 0.1, 1, 10, 100, 1000, 10000]
 
-const amount_invested = [0, 0, 0, 0, 0, 0, 0]
-const investment_values = [0, 0.1, 1, 10, 100, 1000, 10000]
+} else {
+	var cookies = Math.round(parseFloat(localStorage.getItem("cookies") * 10000) / 10000)
+	var multiplier = parseFloat(localStorage.getItem("multiplier"))
+	var increase = parseFloat(localStorage.getItem("increase"))
+
+	// Statistics
+	var totalEarnt = parseFloat(localStorage.getItem("totalEarnt"))
+	var totalCookieClicks = parseInt(localStorage.getItem("totalCookieClicks"))
+	var totalFromAuto = parseFloat(localStorage.getItem("totalFromAuto"))
+	var totalSpent = parseFloat(localStorage.getItem("totalSpent"))
+	var earningAuto = parseFloat(localStorage.getItem("earningAuto"))
+
+	var currentPageInvest = parseInt(localStorage.getItem("currentPageInvest")) // current investment page
+	var amount_invested = [0, 0, 0, 0, 0, 0, 0]
+	var investment_values = [0, 0.1, 1, 10, 100, 1000, 10000]
+}
+
+var num = 0 // used for investing buttons
 
 document.getElementById("cookieCount").textContent = `${cookies} cookies`
-document.getElementById("multiplier").textContent = `${multiplier}x Multiplier`
+document.getElementById("multiplierdash").textContent = `${multiplier}x Multiplier`
 
 //basic sleeping function
 function sleep(ms) {
@@ -38,18 +53,14 @@ function updateStats() {
 	for (var i = 0; i < amount_invested.length; i++) {
 		if (amount_invested[i] > 0) {
 			autoclicker += amount_invested[i] * investment_values[i]
-			if (document.getElementById("autoclick").style.display === "") {
-				console.log("HI")
-				document.getElementById("autoclick").style.display = "block"
 			}
 		}
-	}
-
+	
 	// displaying data
-	autoclicker = Math.floor(autoclicker * 100) / 100
+	autoclicker = Math.floor(autoclicker * 10000) / 10000
 	document.getElementById("multiplier").textContent = `multiplier: ${multiplier}x`
 	document.getElementById("increase").textContent = `increase: ${increase}x`
-	document.getElementById("cookieCount").textContent = `${Math.floor(cookies)} cookie`
+	document.getElementById("cookieCount").textContent = `${Math.floor(cookies)} cookies`
 	document.getElementById("autoclick").textContent = `${autoclicker} cookies per second`
 
 	document.getElementById("totalamount").textContent = `amount earnt total: $${totalEarnt}`
@@ -59,29 +70,69 @@ function updateStats() {
 
 	// storing data
 	localStorage.setItem("cookies", cookies.toString())
+	localStorage.setItem("multiplier", multiplier.toString())
+	localStorage.setItem("increase", increase.toString())
 
-	console.log("stats updated")
+	localStorage.setItem("amount_invested", amount_invested)
+	localStorage.setItem("investment_values", investment_values)
+
+	localStorage.setItem("totalEarnt", totalEarnt)
+	localStorage.setItem("totalCookieClicks",totalCookieClicks)
+	localStorage.setItem("totalFromAuto", totalFromAuto)
+	localStorage.setItem("totalSpent", totalSpent)
+	localStorage.setItem("earningAuto", earningAuto)
+
+	localStorage.setItem("currentPageInvest", currentPageInvest)
+	// console.log(cookies)
+	// console.log("stats updated")
 }
 
-setInterval(function () {updateStats()}, 10)
+// function toadd() {
+// 	let toadd
+// 	for (var a = 0; a < amount_invested.length; a++) {
+// 		toadd += amount_invested[num] * investment_values[num]
+// 	}
+// 	console.log(toadd)
+// 	return toadd
+// }
+
+function increaseCookies() {
+	let toadd = 0
+	toadd += amount_invested[0] * investment_values[0]
+	toadd += amount_invested[1] * investment_values[1]
+	toadd += amount_invested[2] * investment_values[2]
+	toadd += amount_invested[3] * investment_values[3]
+	toadd += amount_invested[4] * investment_values[4]
+	toadd += amount_invested[5] * investment_values[5]
+	toadd += amount_invested[6] * investment_values[6]
+
+	console.log(toadd)
+	earningAuto = toadd
+	cookies = cookies + toadd
+	totalEarnt += toadd
+}
+
+var statsUpdate = setInterval(updateStats, 10)
+var cookieincrease = setInterval(increaseCookies, 1000)
+
+
 
 //not enough money function
 function notEnoughMoney(button) {
 	var original = document.getElementById("investment1_button").textContent
 	document.getElementById(button).textContent = "Not Enough"
 	sleep(2000).then(() => document.getElementById(button).textContent = original)
-	// document.getElementById(button).textContent = original
 }
 
-function increaseCookies(num) {
-	cookies+=investment_values[num]
-}
+
 
 //increase cookies on click
 document.getElementById("cookie").onclick = function() {
 	cookies = Math.round((cookies+multiplier) * 10000) / 10000 // actual amount of cookies
+	totalEarnt += multiplier
 	document.getElementById("cookieCount").textContent = `${Math.floor(cookies)} cookie` // only show floor
 	totalCookieClicks += 1
+
 }
 
 //increase multiplier per click
@@ -98,9 +149,6 @@ document.getElementById("investment1_button").onclick = function() {
 document.getElementById("investment2_button").onclick = function() {
 	if (cookies > 200) {
 		num = 1
-		setInterval(function () {
-			increaseCookies(num)
-		}, 1000)
 		amount_invested[num] += 1
 		spend(200)
 	} else {
@@ -111,11 +159,8 @@ document.getElementById("investment2_button").onclick = function() {
 document.getElementById("investment3_button").onclick = function() {
 	if (cookies >= 2000) {
 		num = 2
-		setInterval(function () {
-			increaseCookies(num)
-		}, 1000)
 		amount_invested[num] += 1
-		cookies -= 2000
+		spend(2000)
 	} else {
 		notEnoughMoney("investment3_button")
 	}
@@ -124,11 +169,8 @@ document.getElementById("investment3_button").onclick = function() {
 document.getElementById("investment4_button").onclick = function() {
 	if (cookies >= 20000) {
 		num = 3
-		setInterval(function () {
-			increaseCookies(num)
-		}, 1000)
 		amount_invested[num] += 1
-		cookies -= 20000
+		spend(20000)
 	} else {
 		notEnoughMoney("investment4_button")
 	}
@@ -137,11 +179,8 @@ document.getElementById("investment4_button").onclick = function() {
 document.getElementById("investment5_button").onclick = function() {
 	if (cookies >= 200000) {
 		num = 4
-		setInterval(function () {
-			increaseCookies(num)
-		}, 1000)
 		amount_invested[num] += 1
-		cookies -= 200000
+		spend(200000)
 	} else {
 		notEnoughMoney("investment5_button")
 	}
@@ -150,9 +189,8 @@ document.getElementById("investment5_button").onclick = function() {
 document.getElementById("investment6_button").onclick = function() {
 	if (cookies >= 2000000) {
 		num = 5
-		setInterval(function () {increaseCookies(num)}, 1000)
 		amount_invested[num] += 1
-		cookies -= 2000000
+		spend(2000000)
 	} else {
 		notEnoughMoney("investment6_button")
 	}
@@ -161,11 +199,8 @@ document.getElementById("investment6_button").onclick = function() {
 document.getElementById("investment7_button").onclick = function() {
 	if (cookies >= 20000000) {
 		num = 6
-		setInterval(function () {
-			increaseCookies(num)
-		}, 1000)
 		amount_invested[num] += 1
-		cookies -= 2000000
+		spend(20000000)
 	} else {
 		notEnoughMoney("investment7_button")
 	}
@@ -179,6 +214,7 @@ document.getElementById("next").onclick = function() {
 	let listOfScroll = ["investments", "statistics", "other"]
 
 	displayEdit(listOfScroll[currentPageInvest], "none")
+	
 	currentPageInvest += 1
 	if (currentPageInvest > 2) {
 		currentPageInvest -= 3
@@ -201,3 +237,32 @@ document.getElementById("back").onclick = function() {
 	displayEdit(listOfScroll[currentPageInvest], "flex")
 }
 
+
+document.getElementById("devtool1").onclick = function() {
+	cookies = 0
+	multiplier = 1
+	amount_invested = [0, 0, 0, 0, 0, 0, 0]
+}
+document.getElementById("devtool2").onclick = function() {
+	cookies = 1000000
+}
+document.getElementById("devtool3").onclick = function() {
+	cookies = 1000000000
+}
+document.getElementById("devtool4").onclick = function() {
+	multiplier *= 1000
+}
+document.getElementById("devtool5").onclick = function() {
+	amount_invested[5] + 1
+}
+document.getElementById("devtool6").onclick = function() {
+	clearInterval(statsUpdate)
+	clearInterval(cookieincrease)
+	sleep(2000).then(() => localStorage.clear())
+	localStorage.clear()
+}
+
+document.getElementById("devtool7").onclick = function() {
+	clearInterval(statsUpdate)
+	clearInterval(cookieincrease)
+}

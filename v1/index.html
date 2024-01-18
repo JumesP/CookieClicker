@@ -20,8 +20,11 @@
     <h1>Welcome to my Cookie Clicker game</h1>
     <div id="Game">
       <div id="cookieContainer">
-        <p id="cookieCount">x Cookies</p>
-        <p id="autoclick">x Cookies per second</p>
+        <div id="dash">
+          <p id="multiplierdash">xx Multiplier</p>
+          <p id="cookieCount">x Cookies</p>
+          <p id="autoclick">x Cps</p>
+        </div>
         <button id="cookie">
           <img src="./images/cookie.png" alt="Cookie Image" />
         </button>
@@ -87,16 +90,25 @@
         </div>
         <div id="statistics" class="page">
           <h3>Stats to be tracked:</h3>
-          <p id="totalamount">amount earnt overall: </p>
-          <p id="totalclicks">amount of times clicked: </p>
-          <p id="generatedauto">amount generated from autoclicker: </p>
-          <p id="spent">amount spent: </p>
-
+          <p id="totalamount">amount earnt overall:</p>
+          <p id="totalclicks">amount of times clicked:</p>
+          <p id="generatedauto">amount generated from autoclicker:</p>
+          <p id="spent">amount spent:</p>
           <p></p>
         </div>
         <div id="other" class="page">
           <p>TBD</p>
           <p>could be list of purchased characters</p>
+          <p>temp for dev tools</p>
+          <div id="devtools">
+            <button id="devtool1">reset</button>
+            <button id="devtool2">set cookies 1m</button>
+            <button id="devtool3">set cookies 1b</button>
+            <button id="devtool4">multiplier 1000x</button>
+            <button id="devtool5">autoclicker 1000cps</button>
+            <button id="devtool6">remove local storage</button>
+            <button id="devtool7">pause loop</button>
+          </div>
         </div>
       </div>
     </div>

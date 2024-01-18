@@ -35,48 +35,48 @@ p {
 
 /* Game / Big Divs */
 
-div#Game {
+#Game {
     height: calc(100dvh - 75px);
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
 }
 
-div#cookieContainer {
+#cookieContainer {
     width: 50%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    /* margin-top: 50px;
+    margin-bottom: 50px; */
 }
 
-div#right {
+#right {
     width: 50%
 }
 
-div#investments {
+#investments {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-content: center;
 }
 
-div#statistics, div#other {
+#statistics, #other {
     display: none;
     flex-wrap: wrap;
     flex-direction: column;
     /* align-content: center; */
 }
 
-div#statistics {
+#statistics {
     flex-wrap: wrap;
     flex-direction: column;
 }
 
-div#other {
+#other {
     flex-wrap: wrap;
     flex-direction: column;
     align-content: center;
@@ -84,13 +84,22 @@ div#other {
 
 /*  Cookie  */
 
+div#dash {
+    width: 100%;
+    border: black 1px solid;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 p#cookieCount {
     font-size: 2.5em;
-    padding-bottom: 20px;
 }
 
 #autoclick {
-    display: none;
+    display: block;
 }
 
 #cookie {
@@ -102,7 +111,8 @@ p#cookieCount {
     padding: 0px;
     align-content: center;
     color: #484848;
-    border: none
+    border: none;
+    margin-top: 200px;
 }
 
 #cookie:active {
@@ -112,6 +122,21 @@ p#cookieCount {
 img {
     width:100%;
     aspect-ratio: 1/1;
+}
+
+/* Dev Tools */
+
+#devtools {
+    border: black 1px solid;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+#devtools > button {
+    height: 50px;
+    margin: 10px
+
 }
 
 /* Top Box */
@@ -176,16 +201,17 @@ button.investment_button {
     padding-left: 0;
 }
 
-
-
-
 /* Other */
 
-@media screen and (max-width: 1750px) {
+@media only screen and (max-width: 1750px) {
     #Game{
         flex-direction: column;
+        align-content: center;
         flex-wrap: nowrap;
-        align-items: center;
+    }
+
+    #cookieContainer, #right {
+        width: 100%
     }
 }
 
