@@ -15,7 +15,8 @@ if (localStorage.getItem("cookies") === null) {
 	var investment_values = [0, 0.1, 1, 10, 100, 1000, 10000]
 
 } else {
-	var cookies = Math.round(parseFloat(localStorage.getItem("cookies") * 10000) / 10000)
+	var cookies = (Math.round(parseFloat(localStorage.getItem("cookies"))*10000))/10000
+	// var cookies = parseInt(localStorage.getItem("cookies")
 	var multiplier = parseFloat(localStorage.getItem("multiplier"))
 	var increase = parseFloat(localStorage.getItem("increase"))
 
@@ -27,8 +28,10 @@ if (localStorage.getItem("cookies") === null) {
 	var earningAuto = parseFloat(localStorage.getItem("earningAuto"))
 
 	var currentPageInvest = parseInt(localStorage.getItem("currentPageInvest")) // current investment page
-	var amount_invested = [0, 0, 0, 0, 0, 0, 0]
-	var investment_values = [0, 0.1, 1, 10, 100, 1000, 10000]
+	var amount_invested = localStorage.getItem("amount_invested")
+	var investment_values = localStorage.getItem("investment_values")
+
+	console.log(typeof totalEarnt)
 }
 
 var num = 0 // used for investing buttons
@@ -58,15 +61,17 @@ function updateStats() {
 	
 	// displaying data
 	autoclicker = Math.floor(autoclicker * 10000) / 10000
-	document.getElementById("multiplier").textContent = `multiplier: ${multiplier}x`
+	document.getElementById("multiplierdash").textContent = `${multiplier}x Multiplier`
 	document.getElementById("increase").textContent = `increase: ${increase}x`
 	document.getElementById("cookieCount").textContent = `${Math.floor(cookies)} cookies`
 	document.getElementById("autoclick").textContent = `${autoclicker} cookies per second`
+		//update multiplier
 
-	document.getElementById("totalamount").textContent = `amount earnt total: $${totalEarnt}`
+	document.getElementById("totalamount").textContent = `amount earnt total: $${Math.floor(totalEarnt*100)/100}`
 	document.getElementById("totalclicks").textContent = `amount of clicks total: ${totalCookieClicks}`
-	document.getElementById("generatedauto").textContent = `amount earnt automatically: $${totalFromAuto}`
+	document.getElementById("generatedauto").textContent = `amount earnt automatically: $${Math.floor(totalFromAuto * 1000)/1000}`
 	document.getElementById("spent").textContent = `amount spent: $${totalSpent}`
+	document.getElementById("amountInvested").textContent = `amount invested: ${amount_invested}`
 
 	// storing data
 	localStorage.setItem("cookies", cookies.toString())
@@ -77,14 +82,16 @@ function updateStats() {
 	localStorage.setItem("investment_values", investment_values)
 
 	localStorage.setItem("totalEarnt", totalEarnt)
-	localStorage.setItem("totalCookieClicks",totalCookieClicks)
-	localStorage.setItem("totalFromAuto", totalFromAuto)
-	localStorage.setItem("totalSpent", totalSpent)
-	localStorage.setItem("earningAuto", earningAuto)
+	localStorage.setItem("totalCookieClicks",totalCookieClicks.toString())
+	localStorage.setItem("totalFromAuto", totalFromAuto.toString())
+	localStorage.setItem("totalSpent", totalSpent.toString())
+	localStorage.setItem("earningAuto", earningAuto.toString())
 
-	localStorage.setItem("currentPageInvest", currentPageInvest)
-	// console.log(cookies)
-	// console.log("stats updated")
+	localStorage.setItem("currentPageInvest", currentPageInvest.toString())
+	console.log("stats updated")
+
+	// console.log(typeof totalEarnt)
+	// console.log(totalEarnt)
 }
 
 // function toadd() {
@@ -98,21 +105,25 @@ function updateStats() {
 
 function increaseCookies() {
 	let toadd = 0
-	toadd += amount_invested[0] * investment_values[0]
-	toadd += amount_invested[1] * investment_values[1]
-	toadd += amount_invested[2] * investment_values[2]
-	toadd += amount_invested[3] * investment_values[3]
-	toadd += amount_invested[4] * investment_values[4]
-	toadd += amount_invested[5] * investment_values[5]
-	toadd += amount_invested[6] * investment_values[6]
-
+	// console.log(totalEarnt)
+	if (amount_invested[1] !== 0) {
+		toadd += amount_invested[0] * investment_values[0]
+		toadd += amount_invested[1] * investment_values[1]
+		toadd += amount_invested[2] * investment_values[2]
+		toadd += amount_invested[3] * investment_values[3]
+		toadd += amount_invested[4] * investment_values[4]
+		toadd += amount_invested[5] * investment_values[5]
+		toadd += amount_invested[6] * investment_values[6]
+	}
+	console.log("Moddle")
 	console.log(toadd)
 	earningAuto = toadd
-	cookies = cookies + toadd
+	// cookies = cookies + toadd
 	totalEarnt += toadd
+	// console.log(totalEarnt)
 }
 
-var statsUpdate = setInterval(updateStats, 10)
+var statsUpdate = setInterval(updateStats, 10) // problem is here somewhere
 var cookieincrease = setInterval(increaseCookies, 1000)
 
 
@@ -245,9 +256,11 @@ document.getElementById("devtool1").onclick = function() {
 }
 document.getElementById("devtool2").onclick = function() {
 	cookies = 1000000
+	totalEarnt += 1000000
 }
 document.getElementById("devtool3").onclick = function() {
 	cookies = 1000000000
+	totalEarnt += 1000000000
 }
 document.getElementById("devtool4").onclick = function() {
 	multiplier *= 1000
@@ -261,7 +274,6 @@ document.getElementById("devtool6").onclick = function() {
 	sleep(2000).then(() => localStorage.clear())
 	localStorage.clear()
 }
-
 document.getElementById("devtool7").onclick = function() {
 	clearInterval(statsUpdate)
 	clearInterval(cookieincrease)

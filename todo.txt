@@ -37,3 +37,4 @@
         - stats at the bottom of the page? supposed to be hidden bug DONE
         - increaseCookies for loop not working
         - initial startup - default values for local storage
+        - cps resets on refresh
