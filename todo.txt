@@ -38,3 +38,9 @@
         - increaseCookies for loop not working
         - initial startup - default values for local storage
         - cps resets on refresh
+
+        - import from storage
+            - total earnt
+            - cps
+            - amount invested array
+            

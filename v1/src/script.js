@@ -1,3 +1,4 @@
+// localStorage.clear()
 if (localStorage.getItem("cookies") === null) {
 	var cookies = 0
 	var multiplier = 1
@@ -16,7 +17,6 @@ if (localStorage.getItem("cookies") === null) {
 
 } else {
 	var cookies = (Math.round(parseFloat(localStorage.getItem("cookies"))*10000))/10000
-	// var cookies = parseInt(localStorage.getItem("cookies")
 	var multiplier = parseFloat(localStorage.getItem("multiplier"))
 	var increase = parseFloat(localStorage.getItem("increase"))
 
@@ -28,8 +28,8 @@ if (localStorage.getItem("cookies") === null) {
 	var earningAuto = parseFloat(localStorage.getItem("earningAuto"))
 
 	var currentPageInvest = parseInt(localStorage.getItem("currentPageInvest")) // current investment page
-	var amount_invested = localStorage.getItem("amount_invested")
-	var investment_values = localStorage.getItem("investment_values")
+	var amount_invested = JSON.parse(localStorage.getItem("amount_invested"))
+	var investment_values = JSON.parse(localStorage.getItem("investment_values"))
 
 	console.log(typeof totalEarnt)
 }
@@ -69,7 +69,7 @@ function updateStats() {
 
 	document.getElementById("totalamount").textContent = `amount earnt total: $${Math.floor(totalEarnt*100)/100}`
 	document.getElementById("totalclicks").textContent = `amount of clicks total: ${totalCookieClicks}`
-	document.getElementById("generatedauto").textContent = `amount earnt automatically: $${Math.floor(totalFromAuto * 1000)/1000}`
+	document.getElementById("generatedauto").textContent = `amount earnt automatically total: $${Math.floor(totalFromAuto * 1000)/1000}`
 	document.getElementById("spent").textContent = `amount spent: $${totalSpent}`
 	document.getElementById("amountInvested").textContent = `amount invested: ${amount_invested}`
 
@@ -77,9 +77,11 @@ function updateStats() {
 	localStorage.setItem("cookies", cookies.toString())
 	localStorage.setItem("multiplier", multiplier.toString())
 	localStorage.setItem("increase", increase.toString())
-
-	localStorage.setItem("amount_invested", amount_invested)
-	localStorage.setItem("investment_values", investment_values)
+	
+	let string = JSON.stringify(amount_invested)
+	localStorage.setItem("amount_invested", string)
+	string = JSON.stringify(investment_values)
+	localStorage.setItem("investment_values", string)
 
 	localStorage.setItem("totalEarnt", totalEarnt)
 	localStorage.setItem("totalCookieClicks",totalCookieClicks.toString())
@@ -92,6 +94,7 @@ function updateStats() {
 
 	// console.log(typeof totalEarnt)
 	// console.log(totalEarnt)
+	// console.log(amount_invested)
 }
 
 // function toadd() {
@@ -106,18 +109,34 @@ function updateStats() {
 function increaseCookies() {
 	let toadd = 0
 	// console.log(totalEarnt)
-	if (amount_invested[1] !== 0) {
-		toadd += amount_invested[0] * investment_values[0]
-		toadd += amount_invested[1] * investment_values[1]
-		toadd += amount_invested[2] * investment_values[2]
-		toadd += amount_invested[3] * investment_values[3]
-		toadd += amount_invested[4] * investment_values[4]
-		toadd += amount_invested[5] * investment_values[5]
-		toadd += amount_invested[6] * investment_values[6]
+	console.log(amount_invested)
+	for (let x = 0; x < 7; x++) {
+		// console.log(amount_invested[x])
+		// console.log(investment_values[x])
+		toadd += parseInt(amount_invested[x]) * parseInt(investment_values[x])
 	}
+
+	// if (amount_invested[1] !== 0) {
+	// 	toadd += amount_invested[0] * investment_values[0]
+	// 	console.log(toadd)
+	// 	toadd += amount_invested[1] * investment_values[1]
+	// 	console.log(toadd)
+	// 	toadd += amount_invested[2] * investment_values[2]
+	// 	console.log(toadd)
+	// 	toadd += amount_invested[3] * investment_values[3]
+	// 	console.log(toadd)
+	// 	toadd += amount_invested[4] * investment_values[4]
+	// 	console.log(toadd)
+	// 	toadd += amount_invested[5] * investment_values[5]
+	// 	console.log(toadd)
+	// 	toadd += amount_invested[6] * investment_values[6]
+	// 	console.log(toadd)
+	// }
 	console.log("Moddle")
+	console.log(typeof amount_invested[1])
 	console.log(toadd)
 	earningAuto = toadd
+	totalFromAuto += toadd
 	// cookies = cookies + toadd
 	totalEarnt += toadd
 	// console.log(totalEarnt)
@@ -161,6 +180,7 @@ document.getElementById("investment2_button").onclick = function() {
 	if (cookies > 200) {
 		num = 1
 		amount_invested[num] += 1
+		console.log(amount_invested)
 		spend(200)
 	} else {
 		notEnoughMoney("investment2_button")
