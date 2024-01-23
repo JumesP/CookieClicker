@@ -91,10 +91,6 @@ function updateStats() {
 
 	localStorage.setItem("currentPageInvest", currentPageInvest.toString())
 	console.log("stats updated")
-
-	// console.log(typeof totalEarnt)
-	// console.log(totalEarnt)
-	// console.log(amount_invested)
 }
 
 // function toadd() {
@@ -108,41 +104,16 @@ function updateStats() {
 
 function increaseCookies() {
 	let toadd = 0
-	// console.log(totalEarnt)
 	console.log(amount_invested)
 	for (let x = 0; x < 7; x++) {
-		// console.log(amount_invested[x])
-		// console.log(investment_values[x])
 		toadd += parseInt(amount_invested[x]) * parseInt(investment_values[x])
 	}
-
-	// if (amount_invested[1] !== 0) {
-	// 	toadd += amount_invested[0] * investment_values[0]
-	// 	console.log(toadd)
-	// 	toadd += amount_invested[1] * investment_values[1]
-	// 	console.log(toadd)
-	// 	toadd += amount_invested[2] * investment_values[2]
-	// 	console.log(toadd)
-	// 	toadd += amount_invested[3] * investment_values[3]
-	// 	console.log(toadd)
-	// 	toadd += amount_invested[4] * investment_values[4]
-	// 	console.log(toadd)
-	// 	toadd += amount_invested[5] * investment_values[5]
-	// 	console.log(toadd)
-	// 	toadd += amount_invested[6] * investment_values[6]
-	// 	console.log(toadd)
-	// }
-	console.log("Moddle")
-	console.log(typeof amount_invested[1])
-	console.log(toadd)
 	earningAuto = toadd
 	totalFromAuto += toadd
-	// cookies = cookies + toadd
 	totalEarnt += toadd
-	// console.log(totalEarnt)
 }
 
-var statsUpdate = setInterval(updateStats, 10) // problem is here somewhere
+var statsUpdate = setInterval(updateStats, 10)
 var cookieincrease = setInterval(increaseCookies, 1000)
 
 
