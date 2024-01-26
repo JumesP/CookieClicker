@@ -1,5 +1,5 @@
 // localStorage.clear()
-if (localStorage.getItem("cookies") === null) {
+if (localStorage.getItem("cookies") === null) { // if there is no save data
 	var cookies = 0
 	var multiplier = 1
 	var increase = 1.25
@@ -139,6 +139,8 @@ document.getElementById("cookie").onclick = function() {
 //increase multiplier per click
 document.getElementById("investment1_button").onclick = function() {
 	if (cookies >= 20) {
+		num = 0
+		amount_invested[num] += 1
 		multiplier = Math.round((multiplier *= increase) * 100) / 100
 		increase = ((increase - 1)/1.25)+1
 		spend(20)
@@ -151,7 +153,6 @@ document.getElementById("investment2_button").onclick = function() {
 	if (cookies > 200) {
 		num = 1
 		amount_invested[num] += 1
-		console.log(amount_invested)
 		spend(200)
 	} else {
 		notEnoughMoney("investment2_button")
@@ -239,6 +240,18 @@ document.getElementById("back").onclick = function() {
 	displayEdit(listOfScroll[currentPageInvest], "flex")
 }
 
+
+document.getElementById("devclick").onclick = function() {
+	if (document.getElementById("cheatmode").value == "yesplease") {
+		displayEdit("cheatmode", "none")
+		displayEdit("devclick", "none")
+		displayEdit("devtools", "flex")
+
+	} else {
+		document.getElementById("devclick").textContent = "Incorrect, dont try again!"
+		sleep(2000).then(() => document.getElementById("devclick").textContent = "Submit or whatever")
+	}
+}
 
 document.getElementById("devtool1").onclick = function() {
 	cookies = 0

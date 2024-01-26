@@ -127,8 +127,9 @@ img {
 /* Dev Tools */
 
 #devtools {
+    display: none;
     border: black 1px solid;
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
     flex-direction: row;
 }
@@ -198,7 +199,7 @@ button.investment_button {
 
 #statistics > p {
     font-size: 1em;
-    padding-left: 0;
+    padding-left: 5px;
 }
 
 /* Other */
